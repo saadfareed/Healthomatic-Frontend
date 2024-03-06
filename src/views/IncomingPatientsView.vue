@@ -28,14 +28,17 @@
         <h1 class="text-xl font-bold">Incoming Patients</h1>
         <div class="flex items-center space-x-4"><button
             class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-red-500 text-white">
-            Automated
-          </button><button
-            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-green-500 text-white">
-            Live Attended
-          </button><button
+            Emergency
+          </button>
+          <button
             class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-yellow-500 text-white">
-            Limited Access
-          </button></div>
+            Priority
+          </button>
+          <button
+            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-green-500 text-white">
+            Non-urgent
+          </button>
+        </div>
       </header>
       <div class="overflow-y-auto p-6">
         <div class="grid grid-cols-3 gap-6">
@@ -47,7 +50,7 @@
               class="rounded-lg border bg-card text-card-foreground shadow-sm mb-4" data-v0-t="card">
               <div class="flex flex-col space-y-1.5 p-6">
                 <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">{{ patient.name }}</h3>
-                <p class="text-sm text-muted-foreground">Patient, Critical Condition</p>
+                <p class="text-sm text-muted-foreground">Symptoms: {{patient.symptoms }}</p>
               </div>
             </div>
           </div>
@@ -59,15 +62,15 @@
               class="rounded-lg border bg-card text-card-foreground shadow-sm mb-4" data-v0-t="card">
               <div class="flex flex-col space-y-1.5 p-6">
                 <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">{{ patient.name }}</h3>
-                <p class="text-sm text-muted-foreground">Patient, Critical Condition</p>
+                <p class="text-sm text-muted-foreground">Symptoms: {{patient.symptoms }}</p>
               </div>
             </div>
           </div>
 
           <!--- Non-Urgent -->
-          <div>
+          <!-- <div>
             <h2 class="mb-4 text-lg font-semibold text-green-500">Level 3 Priority</h2>
-            <!-- <div class="rounded-lg border bg-card text-card-foreground shadow-sm mb-4" data-v0-t="card">
+            <div class="rounded-lg border bg-card text-card-foreground shadow-sm mb-4" data-v0-t="card">
               <div class="flex flex-col space-y-1.5 p-6">
                 <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">John Doe</h3>
                 <p class="text-sm text-muted-foreground">
@@ -94,7 +97,7 @@
                 <h3>Report:</h3>
                 <p>Pending</p>
               </div>
-            </div> -->
+            </div>
 
             <div v-for="patient in non_urgent_patients" :key="patient.id"
               class="rounded-lg border bg-card text-card-foreground shadow-sm mb-4" data-v0-t="card">
@@ -103,7 +106,7 @@
                 <p class="text-sm text-muted-foreground">Patient, Critical Condition</p>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </main>

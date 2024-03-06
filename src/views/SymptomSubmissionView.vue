@@ -10,7 +10,7 @@
             </label>
             <input
               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-              id="name" placeholder="Enter your name" />
+              id="name" placeholder="Enter your name" v-model="name" />
             <div data-lastpass-icon-root=""
               style="position: relative !important; height: 0px !important; width: 0px !important; float: left !important;">
             </div>
@@ -116,7 +116,7 @@
             </div>
             <input
               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-              id="symptoms" placeholder="Enter your symptom e.g. chest pain" />
+              id="symptoms" placeholder="Enter your symptom e.g. chest pain" v-model="symptoms" />
           </div>
           <button
             class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 w-full bg-blue-500 hover:bg-blue-600 text-white"
@@ -146,14 +146,28 @@ export default {
   setup() {
 
     const router = useRouter();
+    const symptoms = ref('');
+    const name = ref('');
 
-    function submitForm() {
+    async function submitForm() {
 
-      console.log("Submit")
+      console.log("Getting priority based on symptoms", symptoms.value)
+      const response = await axios.get(`http://127.0.0.1:8000/getPriorityFromSymptoms/${symptoms.value}`);
+      let priority = response.data.urgency;
+      console.log("Priority:", priority)
+
+      console.log("Adding Patient")
 
       const payload = {
-        name: 'Vue Vixens',
-        priority: 'Non-urgent'
+        name: name.value,
+        gender: "Male",
+        birth_date: "1990-05-15",
+        healthcard_number: "HC123456789",
+        appointment_timings: "2022-03-10T09:00:00",
+        age: 32,
+        priority: priority,
+        symptoms: symptoms.value,
+        diagnoses: "Influenza"
       };
 
       axios.post('http://127.0.0.1:8000/addPatient', payload)
@@ -165,14 +179,12 @@ export default {
         .catch(error => {
           console.error('Error:', error); // Log any errors to the console
         });
-
-
-
-
     }
 
     return {
-      submitForm
+      submitForm,
+      name,
+      symptoms
     }
   }
 }

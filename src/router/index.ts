@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import SymptomSubmissionView from '../views/SymptomSubmissionView.vue'
-import PatientView from '../views/IncomingPatientsView.vue'
+import IncomingPatientsView from '../views/IncomingPatientsView.vue'
 
 
 const routes = [
@@ -12,7 +12,7 @@ const routes = [
     {
         path: '/incoming-patients',
         name: 'IncomingPatientsView',
-        component: PatientView,
+        component: IncomingPatientsView,
     },
 ]
 
