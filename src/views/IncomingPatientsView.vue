@@ -51,6 +51,7 @@
               <div class="flex flex-col space-y-1.5 p-6">
                 <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">{{ patient.name }}</h3>
                 <p class="text-sm text-muted-foreground">Symptoms: {{patient.symptoms }}</p>
+                <p class="text-sm text-muted-foreground">Possible Diagnoses: {{patient.diagnoses }}</p>
               </div>
             </div>
           </div>
@@ -63,14 +64,15 @@
               <div class="flex flex-col space-y-1.5 p-6">
                 <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">{{ patient.name }}</h3>
                 <p class="text-sm text-muted-foreground">Symptoms: {{patient.symptoms }}</p>
+                <p class="text-sm text-muted-foreground">Possible Diagnoses: {{patient.diagnoses }}</p>
               </div>
             </div>
           </div>
 
           <!--- Non-Urgent -->
-          <!-- <div>
+          <div>
             <h2 class="mb-4 text-lg font-semibold text-green-500">Level 3 Priority</h2>
-            <div class="rounded-lg border bg-card text-card-foreground shadow-sm mb-4" data-v0-t="card">
+            <!-- <div class="rounded-lg border bg-card text-card-foreground shadow-sm mb-4" data-v0-t="card">
               <div class="flex flex-col space-y-1.5 p-6">
                 <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">John Doe</h3>
                 <p class="text-sm text-muted-foreground">
@@ -97,7 +99,7 @@
                 <h3>Report:</h3>
                 <p>Pending</p>
               </div>
-            </div>
+            </div> -->
 
             <div v-for="patient in non_urgent_patients" :key="patient.id"
               class="rounded-lg border bg-card text-card-foreground shadow-sm mb-4" data-v0-t="card">
@@ -106,7 +108,7 @@
                 <p class="text-sm text-muted-foreground">Patient, Critical Condition</p>
               </div>
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
     </main>

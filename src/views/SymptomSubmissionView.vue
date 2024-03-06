@@ -156,6 +156,11 @@ export default {
       let priority = response.data.urgency;
       console.log("Priority:", priority)
 
+      console.log("Getting possible diagnoses")
+      const responseDiagnoses = await axios.get(`http://127.0.0.1:8000/getDiagnosesFromSymptoms/${symptoms.value}`);
+      let diagnoses = responseDiagnoses.data.possible_diseases.join(', ');
+      console.log("Diagnoses:", diagnoses)
+
       console.log("Adding Patient")
 
       const payload = {
@@ -167,7 +172,7 @@ export default {
         age: 32,
         priority: priority,
         symptoms: symptoms.value,
-        diagnoses: "Influenza"
+        diagnoses: diagnoses
       };
 
       axios.post('http://127.0.0.1:8000/addPatient', payload)
