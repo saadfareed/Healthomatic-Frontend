@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './symptomsField.css';
+import './css/symptomsField.css';
 
 const SymptomTracker = () => {
   const [customSymptom, setCustomSymptom] = useState('');

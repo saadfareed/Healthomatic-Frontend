@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import './Home.css';
-import GenderField from './genderField';
-import SymptomsField from "./symptomsField";
+import './css/Home.css';
+import GenderField from '../components/genderField';
+import SymptomsField from "../components/symptomsField";
 
 
 export default function Home() {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './genderField.css'; // Import the CSS file
+import './css/genderField.css'; // Import the CSS file
 
 function GenderField() {
   const [gender, setGender] = useState('');
