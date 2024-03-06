@@ -153,7 +153,7 @@ export default {
 
       const payload = {
         name: 'Vue Vixens',
-        priority: 'Non-Urgent'
+        priority: 'Non-urgent'
       };
 
       axios.post('http://127.0.0.1:8000/addPatient', payload)

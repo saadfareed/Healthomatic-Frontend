@@ -39,39 +39,35 @@
       </header>
       <div class="overflow-y-auto p-6">
         <div class="grid grid-cols-3 gap-6">
+          <!--- EMERGENCY -->
           <div>
             <h2 class="mb-4 text-lg font-semibold text-red-500">Level 1 Priority</h2>
-            <div class="rounded-lg border bg-card text-card-foreground shadow-sm mb-4" data-v0-t="card">
+
+            <div v-for="patient in emergency_patients" :key="patient.id"
+              class="rounded-lg border bg-card text-card-foreground shadow-sm mb-4" data-v0-t="card">
               <div class="flex flex-col space-y-1.5 p-6">
-                <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">Tom Hanks</h3>
+                <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">{{ patient.name }}</h3>
                 <p class="text-sm text-muted-foreground">Patient, Critical Condition</p>
               </div>
             </div>
-            <div class="rounded-lg border bg-card text-card-foreground shadow-sm mb-4" data-v0-t="card">
-              <div class="flex flex-col space-y-1.5 p-6">
-                <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">Jane Smith</h3>
-                <p class="text-sm text-muted-foreground">Patient, Awaiting Surgery</p>
-              </div>
-            </div>
           </div>
+
+          <!--- Priority -->
           <div>
             <h2 class="mb-4 text-lg font-semibold text-yellow-500">Level 2 Priority</h2>
-            <div class="rounded-lg border bg-card text-card-foreground shadow-sm mb-4" data-v0-t="card">
+            <div v-for="patient in priority_patients" :key="patient.id"
+              class="rounded-lg border bg-card text-card-foreground shadow-sm mb-4" data-v0-t="card">
               <div class="flex flex-col space-y-1.5 p-6">
-                <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">Emily Johnson</h3>
-                <p class="text-sm text-muted-foreground">Patient, Severe Injury</p>
-              </div>
-            </div>
-            <div class="rounded-lg border bg-card text-card-foreground shadow-sm mb-4" data-v0-t="card">
-              <div class="flex flex-col space-y-1.5 p-6">
-                <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">Michael Brown</h3>
-                <p class="text-sm text-muted-foreground">Patient, Post-Operative Care</p>
+                <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">{{ patient.name }}</h3>
+                <p class="text-sm text-muted-foreground">Patient, Critical Condition</p>
               </div>
             </div>
           </div>
+
+          <!--- Non-Urgent -->
           <div>
             <h2 class="mb-4 text-lg font-semibold text-green-500">Level 3 Priority</h2>
-            <div class="rounded-lg border bg-card text-card-foreground shadow-sm mb-4" data-v0-t="card">
+            <!-- <div class="rounded-lg border bg-card text-card-foreground shadow-sm mb-4" data-v0-t="card">
               <div class="flex flex-col space-y-1.5 p-6">
                 <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">John Doe</h3>
                 <p class="text-sm text-muted-foreground">
@@ -98,6 +94,14 @@
                 <h3>Report:</h3>
                 <p>Pending</p>
               </div>
+            </div> -->
+
+            <div v-for="patient in non_urgent_patients" :key="patient.id"
+              class="rounded-lg border bg-card text-card-foreground shadow-sm mb-4" data-v0-t="card">
+              <div class="flex flex-col space-y-1.5 p-6">
+                <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">{{ patient.name }}</h3>
+                <p class="text-sm text-muted-foreground">Patient, Critical Condition</p>
+              </div>
             </div>
           </div>
         </div>
@@ -108,6 +112,55 @@
 
 
 <script lang="ts">
+
+import axios from 'axios';
+import { ref, onMounted } from 'vue'
+
+export default {
+
+  setup() {
+
+    const emergency_patients = ref([]);
+    const priority_patients = ref([]);
+    const non_urgent_patients = ref([]);
+
+    async function fetchPatientsByPriority(priority: string) {
+      axios.get(`http://127.0.0.1:8000/patients/${priority}`)
+        .then(response => {
+          if (priority === 'Emergency') {
+            emergency_patients.value = response.data;
+          }
+          else if (priority === 'Priority') {
+            priority_patients.value = response.data;
+          }
+          else if (priority === 'Non-urgent') {
+            non_urgent_patients.value = response.data;
+          }
+
+        })
+        .catch(error => {
+          console.error('Error fetching patients:', error);
+        });
+    };
+
+
+    onMounted(() => {
+      fetchPatientsByPriority("Emergency");
+      fetchPatientsByPriority("Priority");
+      fetchPatientsByPriority("Non-urgent");
+    });
+
+
+
+    return {
+      emergency_patients,
+      priority_patients,
+      non_urgent_patients
+    }
+  }
+}
+
+
 
 </script>
 
