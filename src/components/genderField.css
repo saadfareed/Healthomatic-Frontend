@@ -1,0 +1,25 @@
+.gender-field {
+  margin-bottom: 20px;
+}
+
+.gender-label {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.select-gender-option {
+  display: none;
+}
+
+.gender-select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #fff;
+}
+
+.gender-select option {
+  padding: 8px;
+}
