@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './Home.css';
 import GenderField from './genderField';
+import SymptomsField from "./symptomsField";
 
 
 export default function Home() {
@@ -68,6 +69,8 @@ export default function Home() {
               required
             />
           </div>
+
+          <SymptomsField />
 
           <button type="submit">Thank you for submitting</button>
         </form>

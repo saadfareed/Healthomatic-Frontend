@@ -9,6 +9,7 @@
 
 .formContainer {
   padding: inherit;
+  max-width: 400px;
 }
 
   .title {
