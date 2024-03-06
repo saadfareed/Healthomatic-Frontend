@@ -1,0 +1,68 @@
+.symptom-container {
+  margin-bottom: 20px;
+    /* font-family: Arial, sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    width: 400px;
+    margin: 0 auto; */
+  }
+
+  .symptom-tracker {
+    display: flex;
+    margin-bottom: 5px;
+    text-align: start;
+  }
+
+  .symptom-tracker h3 {
+    margin-top: 10px;
+  }
+  
+  .symptom-tracker ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .symptom-tracker li {
+    margin-bottom: 5px;
+  }
+  
+  .symptom-tracker input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .symptom-tracker button {
+    padding: 8px 15px;
+    margin-top: 5px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .symptom-tracker button:hover {
+    background-color: #0056b3;
+  }
+  
+  .symptom-tracker .toggle-btn {
+    display: block;
+    margin-top: 15px;
+    background-color: #ccc;
+    color: #333;
+    border: none;
+    border-radius: 3px;
+    padding: 8px 15px;
+    cursor: pointer;
+  }
+  
+  .symptom-tracker .toggle-btn:hover {
+    background-color: #b3b3b3;
+  }
+  
