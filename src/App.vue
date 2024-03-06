@@ -17,34 +17,6 @@
 </template>
 
 <script lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import { ref } from 'vue'
-
-export default {
-
-  setup() {
-    const tab = ref('Home')
-    const leftDrawerOpen = ref(false)
-
-    function toggleLeftDrawer() {
-      leftDrawerOpen.value = !leftDrawerOpen.value
-    }
-
-    return {
-      tab,
-      leftDrawerOpen,
-      toggleLeftDrawer,
-      model: ref('home'),
-      options: [
-        { label: 'Home', value: 'home', to: '/' },
-        { label: 'Pricing', value: 'pricing', to: '/pricing' },
-        { label: 'About', value: 'about', to: '/about' },
-        { label: 'Contact', value: 'contact', to: '/contact' }
-      ]
-    }
-  }
-}
 
 </script>
-
 <style scoped></style>
