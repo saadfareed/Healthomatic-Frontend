@@ -11,6 +11,7 @@
             <input
               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               id="name" placeholder="Enter your name" v-model="formData.name" />
+            <p v-if="showWarningName" class="text-red-500">Please enter your name.</p>
             <div data-lastpass-icon-root=""
               style="position: relative !important; height: 0px !important; width: 0px !important; float: left !important;">
             </div>
@@ -26,6 +27,7 @@
               <option value="female">Female</option>
               <option value="other">Other</option>
             </select>
+            <p v-if="showWarningGender" class="text-red-500">Please enter your gender.</p>
           </div>
           <div class="mb-4">
             <label class="block mb-2" for="dob">
@@ -34,6 +36,7 @@
             <input
               class="block bg-white h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               type="date" v-model="formData.birth_date" placeholder="Enter text here" />
+            <p v-if="showWarningDateOfBirth" class="text-red-500">Please enter your date of birth.</p>
           </div>
           <div class="mb-4">
             <label class="block mb-2" for="healthcard">
@@ -42,6 +45,7 @@
             <input
               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               v-model="formData.healthcardNumber" id="healthcard" placeholder="Enter your healthcard number" />
+            <p v-if="showWarningHealthcard" class="text-red-500">Please enter your Healthcard Number</p>
             <div data-lastpass-icon-root=""
               style="position: relative !important; height: 0px !important; width: 0px !important; float: left !important;">
             </div>
@@ -54,6 +58,7 @@
               class="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               type="datetime-local" v-model="formData.appointmentTimings" id="appointment"
               placeholder="Enter preferred appointment timings" />
+              <p v-if="showWarningAppointment" class="text-red-500">Please enter the time of your appointment</p>
           </div>
           <div class="mb-4">
             <label class="block mb-2" for="symptoms">
@@ -81,7 +86,7 @@
             <input
               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               id="symptoms" placeholder="Enter your symptom e.g. chest pain" v-model="formData.symptom" />
-            <p v-if="showWarning" class="text-red-500">Please enter a symptom.</p>
+            <p v-if="showWarningSymptoms" class="text-red-500">Please enter a symptom.</p>
           </div>
           <button
             class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 w-full bg-blue-500 hover:bg-blue-600 text-white"
@@ -97,11 +102,7 @@
               <li>Enter each symptom separately or put them all on one line but separated by commas.</li>
             </ul>
           </div>
-          <!-- <div class="flex flex-col">
-            <h2 class="font-semibold">Upload your hand written symptoms Image</h2>
-            <input type="file" @change="handleFileUpload" />
-          </div>
-          <img :src="imageUrl" v-if="imageUrl" style="max-width: 300px; max-height: 300px;" /> -->
+
         </div>
       </div>
     </div>
@@ -123,15 +124,7 @@ export default {
   },
 
   methods: {
-    // handleFileUpload(event) {
-    //   const file = event.target.files[0];
-    //   if (!file.type.startsWith('image/')) {
-    //     alert('Please upload an image file.');
-    //     return;
-    //   }
-    //   this.file = file;
-    //   this.imageUrl = URL.createObjectURL(file);
-    // }
+
   },
 
   setup() {
@@ -144,17 +137,47 @@ export default {
       healthcardNumber: '',
       appointmentTimings: '',
       symptom: '',
-      symptoms: []
     });
-    const showWarning = ref(false);
+    const showWarningSymptoms = ref(false);
+    const showWarningName = ref(false);
+    const showWarningAge = ref(false);
+    const showWarningGender = ref(false);
+    const showWarningHealthcard = ref(false);
+    const showWarningAppointment = ref(false);
+    const showWarningDateOfBirth = ref(false);
+
+
 
     async function submitForm() {
 
       // Warnings for empty data
+      let invalidSubmission = false
       if (formData.value.symptom === '') {
-        showWarning.value = true;
-        return;
+        showWarningSymptoms.value = true;
+        invalidSubmission = true;
       }
+      if (formData.value.name === '') {
+        showWarningName.value = true;
+        invalidSubmission = true;
+      }
+      if (formData.value.gender === '') {
+        showWarningGender.value = true;
+        invalidSubmission = true;
+      }
+      if (formData.value.birth_date === '') {
+        showWarningDateOfBirth.value = true;
+        invalidSubmission = true;
+      }
+      if (formData.value.healthcardNumber === '') {
+        showWarningHealthcard.value = true;
+        invalidSubmission = true;
+      }
+      if (formData.value.appointmentTimings === '') {
+        showWarningAppointment.value = true;
+        invalidSubmission = true;
+      }
+
+      if (invalidSubmission) return;
 
       console.log("Getting priority based on symptoms", formData.value.symptom)
       const response = await axios.get(`http://127.0.0.1:8000/getPriorityFromSymptoms/${symptoms.value}`);
@@ -190,23 +213,17 @@ export default {
         });
     }
 
-    // async function addSymptoms () {
-    //   if (formData.value.symptom != '') {
-    //     formData.value.symptoms.push(formData.value.symptom)
-    //     formData.value.symptom = ''
-    //   }
-    // };
-
-    // async function addDefaultSymptom (symptom) {
-    //   formData.value.symptoms.push(symptom)
-    // };
-
     return {
       submitForm,
-      // addSymptoms,
-      // addDefaultSymptom,
       formData,
-      showWarning
+      showWarningSymptoms,
+      showWarningName,
+      showWarningAge,
+      showWarningGender,
+      showWarningHealthcard,
+      showWarningAppointment,
+      showWarningDateOfBirth,
+
     }
   }
 }
