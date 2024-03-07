@@ -1,9 +1,10 @@
 <template>
-  <div class="flex h-screen bg-white">
-    <aside class="w-64 bg-gray-100 p-6">
-      <div class="flex flex-col items-center mb-6"><span
-          class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full"><span
-            class="flex h-full w-full items-center justify-center rounded-full bg-muted">NM</span></span>
+  <div class="flex h-screen bg-blue-50">
+    <aside class="w-64 bg-gray-200 p-6">
+      <div class="flex flex-col items-center mb-6">
+        <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
+          <span class="flex h-full w-full items-center justify-center rounded-full bg-muted"></span>
+        </span>
         <div class="mt-2 text-center">
           <p class="text-sm font-semibold">Joe</p>
           <p class="text-xs text-gray-600">Physician</p>
@@ -24,18 +25,18 @@
         </a></nav>
     </aside>
     <main class="flex-1 overflow-hidden">
-      <header class="flex items-center justify-between bg-white p-6">
-        <h1 class="text-xl font-bold">Incoming Patients</h1>
+      <header class="flex items-center justify-between bg-blue-50 p-6">
+        <h1 class="text-xl font-bold ">Incoming Patients</h1>
         <div class="flex items-center space-x-4"><button
-            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-red-500 text-white">
+            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-red-700 text-white">
             Emergency
           </button>
           <button
-            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-yellow-500 text-white">
+            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-amber-600 text-white">
             Priority
           </button>
           <button
-            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-green-500 text-white">
+            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-emerald-600 text-white">
             Non-urgent
           </button>
         </div>
@@ -44,34 +45,37 @@
         <div class="grid grid-cols-3 gap-6">
           <!--- EMERGENCY -->
           <div>
-            <h2 class="mb-4 text-lg font-semibold text-red-500">Level 1 Priority</h2>
+            <h2 class="mb-4 text-lg font-semibold text-red-600">Level 1 Priority</h2>
 
             <div v-for="patient in emergency_patients" :key="patient.id"
-              class="rounded-lg border bg-card text-card-foreground shadow-sm mb-4" data-v0-t="card">
+              class="rounded-lg border bg-card bg-white text-card-foreground shadow-sm mb-4" data-v0-t="card">
               <div class="flex flex-col space-y-1.5 p-6">
                 <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">{{ patient.name }}</h3>
-                <p class="text-sm text-muted-foreground">Symptoms: {{patient.symptoms }}</p>
-                <p class="text-sm text-muted-foreground">Possible Diagnoses: {{patient.diagnoses }}</p>
+                <p class="text-sm text-muted-foreground">Symptoms: {{ patient.symptoms }}</p>
+                <p class="text-sm text-muted-foreground">Possible Diagnoses: {{ patient.diagnoses }}</p>
               </div>
             </div>
           </div>
 
           <!--- Priority -->
           <div>
-            <h2 class="mb-4 text-lg font-semibold text-yellow-500">Level 2 Priority</h2>
+            <h2 class="mb-4 text-lg font-semibold text-amber-500">Level 2 Priority</h2>
             <div v-for="patient in priority_patients" :key="patient.id"
-              class="rounded-lg border bg-card text-card-foreground shadow-sm mb-4" data-v0-t="card">
+              class="rounded-lg border bg-card bg-white text-card-foreground shadow-sm mb-4" data-v0-t="card">
               <div class="flex flex-col space-y-1.5 p-6">
-                <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">{{ patient.name }}</h3>
-                <p class="text-sm text-muted-foreground">Symptoms: {{patient.symptoms }}</p>
-                <p class="text-sm text-muted-foreground">Possible Diagnoses: {{patient.diagnoses }}</p>
+                <h3 class="pb-5 text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">{{ patient.name }}</h3>
+                <p class="text-md font-bold text-muted-foreground">Symptoms:</p>
+                <p class="text-sm text-muted-foreground">{{ patient.symptoms }}</p>
+                <p class="text-md font-bold text-muted-foreground">Possible Diagnoses:</p>
+                <p class="text-sm text-muted-foreground">{{ patient.diagnoses }}</p>
+
               </div>
             </div>
           </div>
 
           <!--- Non-Urgent -->
           <div>
-            <h2 class="mb-4 text-lg font-semibold text-green-500">Level 3 Priority</h2>
+            <h2 class="mb-4 text-lg font-semibold text-emerald-500">Level 3 Priority</h2>
             <!-- <div class="rounded-lg border bg-card text-card-foreground shadow-sm mb-4" data-v0-t="card">
               <div class="flex flex-col space-y-1.5 p-6">
                 <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">John Doe</h3>
@@ -102,7 +106,7 @@
             </div> -->
 
             <div v-for="patient in non_urgent_patients" :key="patient.id"
-              class="rounded-lg border bg-card text-card-foreground shadow-sm mb-4" data-v0-t="card">
+              class="rounded-lg border bg-card bg-white  text-card-foreground shadow-sm mb-4" data-v0-t="card">
               <div class="flex flex-col space-y-1.5 p-6">
                 <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">{{ patient.name }}</h3>
                 <p class="text-sm text-muted-foreground">Patient, Critical Condition</p>
@@ -133,7 +137,7 @@ export default {
       let api_url = "https://healthomatic-psi.vercel.app"
       console.log("API URL:", api_url)
       api_url = 'http://127.0.0.1:8000'
-      
+
       axios.get(`${api_url}/patients/${priority}`)
         .then(response => {
           if (priority === 'Emergency') {
