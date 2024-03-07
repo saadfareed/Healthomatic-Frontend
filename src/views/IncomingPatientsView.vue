@@ -50,9 +50,12 @@
             <div v-for="patient in emergency_patients" :key="patient.id"
               class="rounded-lg border bg-card bg-white text-card-foreground shadow-sm mb-4" data-v0-t="card">
               <div class="flex flex-col space-y-1.5 p-6">
-                <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">{{ patient.name }}</h3>
-                <p class="text-sm text-muted-foreground">Symptoms: {{ patient.symptoms }}</p>
-                <p class="text-sm text-muted-foreground">Possible Diagnoses: {{ patient.diagnoses }}</p>
+                <h3 class="pb-5 text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">{{ patient.name }}</h3>
+                <p class="text-md font-bold text-muted-foreground">Symptoms:</p>
+                <p class="text-sm text-muted-foreground">{{ patient.symptoms }}</p>
+                <p class="text-md font-bold text-muted-foreground">Possible Diagnoses:</p>
+                <p class="text-sm text-muted-foreground">{{ patient.diagnoses }}</p>
+
               </div>
             </div>
           </div>
@@ -108,8 +111,11 @@
             <div v-for="patient in non_urgent_patients" :key="patient.id"
               class="rounded-lg border bg-card bg-white  text-card-foreground shadow-sm mb-4" data-v0-t="card">
               <div class="flex flex-col space-y-1.5 p-6">
-                <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">{{ patient.name }}</h3>
-                <p class="text-sm text-muted-foreground">Patient, Critical Condition</p>
+                <h3 class="pb-5 text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">{{ patient.name }}</h3>
+                <p class="text-md font-bold text-muted-foreground">Symptoms:</p>
+                <p class="text-sm text-muted-foreground">{{ patient.symptoms }}</p>
+                <p class="text-md font-bold text-muted-foreground">Possible Diagnoses:</p>
+                <p class="text-sm text-muted-foreground">{{ patient.diagnoses }}</p>
               </div>
             </div>
           </div>
