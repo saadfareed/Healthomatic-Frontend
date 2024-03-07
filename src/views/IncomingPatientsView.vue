@@ -116,7 +116,7 @@
 </template>
 
 
-<script lang="ts">
+<script lang="js">
 
 import axios from 'axios';
 import { ref, onMounted } from 'vue'
@@ -129,8 +129,12 @@ export default {
     const priority_patients = ref([]);
     const non_urgent_patients = ref([]);
 
-    async function fetchPatientsByPriority(priority: string) {
-      axios.get(`http://127.0.0.1:8000/patients/${priority}`)
+    async function fetchPatientsByPriority(priority) {
+      let api_url = "https://healthomatic-psi.vercel.app"
+      console.log("API URL:", api_url)
+      api_url = 'http://127.0.0.1:8000'
+      
+      axios.get(`${api_url}/patients/${priority}`)
         .then(response => {
           if (priority === 'Emergency') {
             emergency_patients.value = response.data;
