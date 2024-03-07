@@ -58,7 +58,7 @@
               class="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               type="datetime-local" v-model="formData.appointmentTimings" id="appointment"
               placeholder="Enter preferred appointment timings" />
-              <p v-if="showWarningAppointment" class="text-red-500">Please enter the time of your appointment</p>
+            <p v-if="showWarningAppointment" class="text-red-500">Please enter the time of your appointment</p>
           </div>
           <div class="mb-4">
             <label class="block mb-2" for="symptoms">
@@ -152,30 +152,25 @@ export default {
 
       // Warnings for empty data
       let invalidSubmission = false
-      if (formData.value.symptom === '') {
-        showWarningSymptoms.value = true;
+
+
+      if (
+        formData.value.symptom === '' ||
+        formData.value.name === '' ||
+        formData.value.gender === '' ||
+        formData.value.birth_date === '' ||
+        formData.value.healthcardNumber === '' ||
+        formData.value.appointmentTimings === ''
+      ) {
         invalidSubmission = true;
       }
-      if (formData.value.name === '') {
-        showWarningName.value = true;
-        invalidSubmission = true;
-      }
-      if (formData.value.gender === '') {
-        showWarningGender.value = true;
-        invalidSubmission = true;
-      }
-      if (formData.value.birth_date === '') {
-        showWarningDateOfBirth.value = true;
-        invalidSubmission = true;
-      }
-      if (formData.value.healthcardNumber === '') {
-        showWarningHealthcard.value = true;
-        invalidSubmission = true;
-      }
-      if (formData.value.appointmentTimings === '') {
-        showWarningAppointment.value = true;
-        invalidSubmission = true;
-      }
+
+      showWarningName.value = formData.value.name === '';
+      showWarningGender.value = formData.value.gender === '';
+      showWarningDateOfBirth.value = formData.value.birth_date === '';
+      showWarningHealthcard.value = formData.value.healthcardNumber === '';
+      showWarningAppointment.value = formData.value.appointmentTimings === '';
+      showWarningSymptoms.value = formData.value.symptom === '';
 
       if (invalidSubmission) return;
 
