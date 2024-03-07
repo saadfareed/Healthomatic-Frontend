@@ -107,12 +107,19 @@
             Thank you for submitting
           </button>
         </div>
-        <div class="w-1/2 p-4">
-          <h2 class="text-xl font-semibold mb-4">Enter symptoms in your own words OR start typing</h2>
-          <ul class="list-disc pl-5 text-sm">
-            <li>Enter your symptoms in normal, everyday language.</li>
-            <li>Enter each symptom separately or put them all on one line but separated by commas.</li>
-          </ul>
+        <div class="w-1/2 p-4 flex flex-col gap-4">
+          <div class="mb-2">
+            <h2 class="text-xl font-semibold mb-4">Enter symptoms in your own words OR start typing</h2>
+            <ul class="list-disc pl-5 text-sm">
+              <li>Enter your symptoms in normal, everyday language.</li>
+              <li>Enter each symptom separately or put them all on one line but separated by commas.</li>
+            </ul>
+          </div>
+          <div class="flex flex-col">
+            <h2 class="font-semibold">Upload your hand written symptoms Image</h2>
+            <input type="file" @change="handleFileUpload" />
+          </div>
+          <img :src="imageUrl" v-if="imageUrl" style="max-width: 300px; max-height: 300px;" />
         </div>
       </div>
     </div>
@@ -125,6 +132,25 @@ import axios from 'axios';
 import { ref } from 'vue'
 
 export default {
+
+  data() {
+    return {
+      imageUrl: null,
+      file: null
+    };
+  },
+
+  methods: {
+    handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (!file.type.startsWith('image/')) {
+        alert('Please upload an image file.');
+        return;
+      }
+      this.file = file;
+      this.imageUrl = URL.createObjectURL(file);
+    }
+  },
 
   setup() {
 
